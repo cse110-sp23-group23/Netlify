@@ -31,7 +31,7 @@ exports.handler = async function(event, context) {
   } catch (error) {
 	return {
 		statusCode: 200,
-		body: `Error found, text: ${error}`,
+		body: `{message: "Error found, text: ${error}"}`,
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Headers': 'Content-Type'
