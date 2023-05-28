@@ -4,10 +4,10 @@ exports.handler = async function(event, context) {
   const prompt = event.queryStringParameters.prompt;
   
   const response = await axios.post(
-    'https://api.openai.com/v1/engines/davinci-codex/completions',
+    'https://api.openai.com/v1/chat/completions',
     {
-      prompt: prompt,
-      max_tokens: 100,
+	  model: 'gpt-3.5-turbo',
+      messages: [{role: 'user', content: prompt}],
     },
     {
       headers: {
@@ -17,9 +17,11 @@ exports.handler = async function(event, context) {
     }
   );
   
+  const chatGptResponse = response.data.choices[0].message.content;
+
   return {
     statusCode: 200,
-    body: JSON.stringify(response.data),
+    body: JSON.stringify(chatGptResponse),
 	headers: {
 		'Access-Control-Allow-Origin': '*',
 		'Access-Control-Allow-Headers': 'Content-Type'
