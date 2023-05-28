@@ -66,7 +66,7 @@ exports.handler = async function(event, context) {
 		},
 	);
 
-	const chatGptResponse = response.data.choices[0].message.content;
+	const chatGptResponse = response.choices[0].text;
 
 	return {
 		statusCode: 200,
