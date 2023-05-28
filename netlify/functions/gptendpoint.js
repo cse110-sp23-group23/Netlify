@@ -1,9 +1,7 @@
 const axios = require('axios');
 
 exports.handler = async function(event, context) {
-  const prompt = event.queryStringParameters.prompt;
-  
-  try {
+  	const prompt = event.queryStringParameters.prompt;
 	const response = await axios.post(
 		'https://api.openai.com/v1/chat/completions',
 		{
@@ -17,7 +15,7 @@ exports.handler = async function(event, context) {
 		}
 		}
 	);
-	
+
 	const chatGptResponse = response.data.choices[0].message.content;
 
 	return {
@@ -28,14 +26,4 @@ exports.handler = async function(event, context) {
 			'Access-Control-Allow-Headers': 'Content-Type'
 		}  
 	};
-  } catch (error) {
-	return {
-		statusCode: 200,
-		body: `{message: "Error found, text: ${error}"}`,
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Headers': 'Content-Type'
-		}  
-	};
-  }
 }

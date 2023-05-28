@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
 	</head>
 	<body>
-		<script>
-			const prompt = "Translate the following English text to French: '{here is a test}'";
-			const url = `https://subtle-licorice-abd04e.netlify.app/.netlify/functions/gptendpoint?prompt=${encodeURIComponent(prompt)}`;
-
-			fetch(url)
-			.then(response => response.json())
-			.then(data => console.log(data))
-			.catch(error => console.error('Error:', error));
-		</script>
 	</body>
 </html>
