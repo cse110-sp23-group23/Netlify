@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+	</head>
+	<body>
+		<script>
+			window.addEventListener('click', async () => {
+  				const response = await fetch('/.netlify/functions/hello-world')
+					.then((response) => response.json());
+				document.write(JSON.stringify(response));
+			});
+		</script>
+	</body>
+</html>
