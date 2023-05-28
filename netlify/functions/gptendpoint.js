@@ -17,6 +17,18 @@ exports.handler = async function(event, context) {
 		};
 	}
 
+	if (event.httpMethod === 'OPTIONS') {
+		return {
+			statusCode: 200,
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers': 'Content-Type',
+				'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+			},
+			body: 'This was a preflight request!',
+		}
+	}
+
 	const response = await axios.post(
 		'https://api.openai.com/v1/chat/completions',
 		{
