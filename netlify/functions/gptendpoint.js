@@ -2,6 +2,21 @@ const axios = require('axios');
 
 exports.handler = async function(event, context) {
   	const prompt = event.queryStringParameters.prompt;
+	const referer = event.headers.referer || '';
+
+	const allowedReferer = 'https://zoltar.live';
+
+	if (!referer.includes(allowedReferer)) {
+		return {
+		statusCode: 403,
+		body: JSON.stringify({ error: 'Unauthorized' }),
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Headers': 'Content-Type'
+		}  
+		};
+	}
+
 	const response = await axios.post(
 		'https://api.openai.com/v1/chat/completions',
 		{
@@ -9,11 +24,11 @@ exports.handler = async function(event, context) {
 		messages: [{role: 'user', content: prompt}],
 		},
 		{
-		headers: {
+			headers: {
 			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-		}
-		}
+			'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+			}
+		},
 	);
 
 	const chatGptResponse = response.data.choices[0].message.content;
@@ -23,7 +38,7 @@ exports.handler = async function(event, context) {
 		body: JSON.stringify(chatGptResponse),
 		headers: {
 			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Headers': 'Content-Type'
-		}  
+			'Access-Control-Allow-Headers': 'Content-Type',
+		},
 	};
 }
