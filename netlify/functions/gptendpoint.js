@@ -6,16 +6,16 @@ exports.handler = async function(event, context) {
 
 	const allowedReferer = 'https://zoltar.live';
 
-	if (!referer.includes(allowedReferer)) {
-		return {
-		statusCode: 403,
-		body: JSON.stringify({ error: 'Unauthorized' }),
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Headers': 'Content-Type'
-		}  
-		};
-	}
+	// if (!referer.includes(allowedReferer)) {
+	// 	return {
+	// 	statusCode: 403,
+	// 	body: JSON.stringify({ error: 'Unauthorized' }),
+	// 	headers: {
+	// 		'Access-Control-Allow-Origin': '*',
+	// 		'Access-Control-Allow-Headers': 'Content-Type'
+	// 	}  
+	// 	};
+	// }
 
 	if (event.httpMethod === 'OPTIONS') {
 		return {
