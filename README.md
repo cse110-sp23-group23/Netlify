@@ -1,2 +1,4 @@
 # Netlify
-Serverless functions (AWS Lambda) through Netlify
+Serverless functions deployed through Netlify (AWS Lambda)
+
+Private endpoint
